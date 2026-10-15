@@ -123,6 +123,12 @@ def main():
               research.SECTION, "")
     with open(os.path.join(DIST, "404.html"), "w", encoding="utf-8") as f:
         f.write(nf.replace('href="../"', 'href="/"').replace('href="../assets/', 'href="/assets/'))
+    urls = [f"https://{DOMAIN}/" + (local(h) + "/" if local(h) else "") for h in research.BUILDERS]
+    with open(os.path.join(DIST, "sitemap.xml"), "w") as f:
+        f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n")
+    with open(os.path.join(DIST, "robots.txt"), "w") as f:
+        f.write(f"User-agent: *\nAllow: /\nSitemap: https://{DOMAIN}/sitemap.xml\n")
     with open(os.path.join(DIST, "CNAME"), "w") as f:
         f.write(DOMAIN + "\n")
     open(os.path.join(DIST, ".nojekyll"), "w").close()
