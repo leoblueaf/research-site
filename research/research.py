@@ -290,15 +290,24 @@ RESULTS = [
         ("proved", 39, "Interface Structure Theorem",
          "Every complete interface in the program does three things in order: rearranges, erases the quantum coherence, then processes what is left classically.",
          r"\Phi=\Lambda\circ\Delta\circ U", ""),
-        ("proved", 42, "Interface Rendering No-Go",
+        ("model", 42, "Interface Rendering No-Go",
          "Inside that interface class, hidden quantum structure can never become visible data. A doorway that renders it would have to be a new kind of structure.",
-         r"\Pi_D\,(U\,c\,U^\dagger)=0\ \ \text{for every coherence } c", ""),
+         r"\Pi_D\,(U\,c\,U^\dagger)=0\ \ \text{for every coherence } c", "Holds for the program's own definition of a legitimate interface: a monomial unitary, then dephasing, then a classical channel."),
         ("proved", 43, "Unital-Drive No-Go",
          "Under the program's own erasure process, no amount of shaking can keep a structured quantum state alive. Everything settles to the blank state.",
          r"\mathrm{Re}\,\mathrm{Tr}[\rho\,\mathcal L(\rho)]\le0\implies \rho^*=I/16", ""),
         ("proved", 45, "Holographic boundary identity",
-         "For symmetric four-site states, sitting on the boundary of the holographic entropy cone is exactly the same as having one entropy constant for every cut.",
-         r"I_3=12\,[\,c_W(4,1)-c_W(4,2)\,]", ""),
+         "For symmetric pure four-site states, sitting on the boundary of the holographic entropy cone is exactly the same as having one entropy constant for every cut.",
+         r"I_3=12\,[\,c_W(4,1)-c_W(4,2)\,]", "Exact, but only for symmetric pure states of four sites. It is not a general law of quantum information."),
+        ("model", 75, "Reading the hidden phases",
+         "In a fully symmetric model system, visible data alone can never reveal its hidden quantum phases. One extra sideways measurement on a single site, read together with the visible data of the rest, reveals all of them.",
+         r"\langle X_0\Pi_w\rangle+i\langle Y_0\Pi_w\rangle\ \propto\ \tbinom{m-1}{w}\,s\,e^{\,i(\theta_w-\theta_{w+1})}", "Exact within the program's source-free symmetric model."),
+        ("model", 76, "The cost of seeing rare structure",
+         "The hidden phases attached to rare arrangements are exponentially hard to learn. Any measurement at all needs a number of repetitions that grows roughly like two to the power of the system size.",
+         r"\mathrm{Var}(\hat\theta_w)\ \ge\ \frac{1}{4N\,p_w(1-p_w)},\qquad p_w=\binom{m}{w}2^{-m}", "A standard quantum estimation bound applied to the program's model. It bounds the spread of unbiased estimates."),
+        ("model", 77, "Size consistency forces the plain state",
+         "If the model system must look the same after one site is removed, its hidden phases are forced to step evenly, which is just the plain state seen in a rotated frame.",
+         r"\mathrm{Tr}_1\,\rho_{m+1}\in\mathcal F_m\iff\theta_{w+1}-\theta_w=\text{const}", "Exact within the source-free phase family. Removing a site is an extra requirement, not a consequence of the model."),
         ("model", 47, "The tetrahedral-angle root",
          "Requiring two neighbouring depths to agree picks out the angle whose cosine is minus one third, the tetrahedral angle, without putting it in by hand. At that angle no single site carries coherence of its own.",
          r"\cos\alpha=-\tfrac13", "This is four-switch counting, not independent evidence for geometry."),
@@ -306,7 +315,7 @@ RESULTS = [
     ("Toward spacetime", "What the algebra gives, and where it stops.", [
         ("proved", 28, "Observer metric signature",
          "The observer's filter splits directions into one kept and others discarded, which gives the plus, minus, minus, minus sign pattern of spacetime, algebraically.",
-         r"g_{\mathrm{obs}}(A,B)=\langle A,(2\Pi_D-I)B\rangle_{\mathrm{HS}}", "Algebraic only. It does not by itself establish physical Lorentz symmetry."),
+         r"g_{\mathrm{obs}}(A,B)=\langle A,(2\Pi_D-I)B\rangle_{\mathrm{HS}}", "Algebraic only. It does not establish a spacetime manifold, a dynamical metric or physical causal structure."),
         ("proved", 31, "Fixed-Depth Causal-Set No-Go",
          "Counting what a depth-four observer can reach grows like the fourth power, but the causal structure stays four steps tall, so it is not four-dimensional spacetime.",
          r"f_t\sim\frac{2(2^t-1)\,t!}{r^t}\to0,\qquad H=t", "A correction to an earlier reading; see Corrections."),
@@ -365,9 +374,14 @@ matter. These are the ones currently open, stated so that each could be settled.
 those rules. Something else must choose among them.</p>
 <dl>
 <dt>Known</dt><dd>The usual candidates fail in exact ways: shaking the system, symmetry, and agreement on visible data alone
-all fail to choose. {label("numerical")} Requiring neighbouring observers to stay consistent strongly favours two-way couplings.</dd>
-<dt>Would settle it</dt><dd>A proof that consistency forces the coupling to be two-way, and a principle that picks which
-two-way coupling.</dd>
+all fail to choose. {label("numerical")} Requiring neighbouring observers to stay consistent makes the simplest two-way
+coupling rigid: it cannot be bent slightly into a one-way one. But consistency does not force couplings to be two-way in general.
+Many one-way couplings pass every consistency test. In a fully symmetric model system, further candidates also fail to choose:
+requiring the system to look the same at every size, favouring equal signals at every depth, and outside noise, which erases the
+hidden phases rather than choosing them. {label("numerical")} Steady self-renewal combined with a sufficiently complex internal motion
+can hold a structured state in place, but then that motion has to be chosen instead.</dd>
+<dt>Would settle it</dt><dd>A principle, beyond consistency, that picks the coupling between neighbouring observers, or a proof
+that no such principle exists inside the program's rules.</dd>
 </dl></div>
 
 <div class="rs-open">{label("open")}
@@ -470,7 +484,11 @@ CORRECTIONS = [
      "An exact calculation showed a small but nonzero floor. The residual never reaches zero once the program's source term is switched on."),
     ("September 2026", "What picks the geometry",
      "Two-way couplings decide which observers are admissible, and complementary couplings decide the geometry.",
-     "The second half was refuted by a control experiment. Consistency favours two-way couplings; it does not pick which one."),
+     "The second half was refuted by a control experiment. Consistency does not pick which two-way coupling; see also the next correction."),
+    ("October 2026", "Two-way doorways",
+     "Requiring neighbouring observers to stay consistent strongly favours two-way couplings.",
+     "That held only in the narrow families first tested. A wider search found many one-way couplings that pass every consistency test "
+     "and still carry hidden structure across. What survives: the simplest two-way coupling cannot be bent slightly into a one-way one."),
     ("October 2026", "Theorem sheet errata",
      "Several entries in the program's theorem sheets, including one statement that read the wrong way round.",
      "Corrected, relabelled where the evidence was weaker than stated, and reissued with an errata list."),
