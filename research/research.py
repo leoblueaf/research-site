@@ -312,6 +312,32 @@ RESULTS = [
          "Requiring two neighbouring depths to agree picks out the angle whose cosine is minus one third, the tetrahedral angle, without putting it in by hand. At that angle no single site carries coherence of its own.",
          r"\cos\alpha=-\tfrac13", "This is four-switch counting, not independent evidence for geometry."),
     ]),
+    ("Selecting a state", "What can and cannot pick the hidden quantum interior.", [
+        ("model", 78, "Self-consistency leaves only the empty coupling pattern",
+         "Each observer infers the coupling phases to its neighbours from the steady state. Suppose every inference must give back the original phase, in both directions and for every setting of the other neighbours. In the program's renewal model, the only pattern that passes has every coupling phase equal to zero.",
+         r"\hat J_{ij}(z)=J_{ij}\ \ \text{for every directed pair and background}\ \implies\ J_{ij}\equiv0\pmod{2\pi}",
+         "Exact on every finite network in this model: pairwise phase couplings, flips, dephasing and steady local renewal toward a fixed coherent state. It does not rule out nonzero solutions in other preparation models."),
+        ("model", 79, "A source is not a detector",
+         "Supplying fresh quantum coherence does not by itself give observers a way to detect an unknown phase. With the program's motions, renewal and record-keeping instruments, every recorded history is exactly as likely as it would be if the input's coherence had been erased first.",
+         r"p(h\mid\rho)=p(h\mid\Delta\rho)\ \ \text{for every recorded history } h",
+         "Holds when every available operation leaves the recorded measurement effects diagonal. Coherent basis-changing controls fall outside it. The difference between creating and detecting coherence is established quantum resource theory; the program's contribution is placing its own resources on either side of it."),
+        ("model", 80, "Observers can prepare a unique state",
+         "For a fixed coupling rule, observers can measure a complete set of compatible joint quantities and correct the wrong outcomes locally. This drives every starting state to one and the same final state. Depending on the coupling rule, that state can be entangled or a simple product.",
+         r"L_i=Z_i\,\tfrac12\left(I-K_i\right),\quad K_i=D X_i D^\dagger\ \implies\ \rho_\infty=D\,|{+}\rangle\langle{+}|^{\otimes m}D^\dagger",
+         "A standard construction (Kraus and coworkers, 2008). It assumes the needed coherence-reading instruments and feedback, which the program does not yet derive, and it does not choose the coupling rule."),
+        ("model", 81, "Three-site checks allow only chains and rings",
+         "Give each of the observers' checks its own correction site, with a one-site correction that changes only that check's outcome. If every check touches at most three sites, the only connected states they can prepare are chain or ring states, up to local changes of frame.",
+         r"q_{\mathrm{fb}}=1+d_{\mathrm{LC}},\qquad q_{\mathrm{fb}}\le3\iff G\sim_{\mathrm{LC}}P_n\ \text{or}\ C_n\quad(n\ge4)",
+         "This classifies that controller design, not every way of preparing a state. The three-site limit is an added assumption, not derived from the program's rules. Allowing two corrections on one site changes the problem."),
+        ("model", 82, "Sameness from every site leaves the ring",
+         "Within that controller design, require that any site can be swapped with any other without changing a single entanglement value. From five sites up, this rules out chains and leaves only rings.",
+         r"q_{\mathrm{fb}}\le3,\ \text{connected},\ \mathrm{Aut}(S)\ \text{transitive}\iff G\sim_{\mathrm{LC}}C_n\quad(n\ge5)",
+         "Short reach, connectedness and sameness of entanglement from every site are all added assumptions. Equal entanglement does not mean identical physical observers. The result fixes neither the size of the ring, a length scale nor a clock."),
+        ("proved", 83, "Chains and odd rings are holographic",
+         "For every chain-shaped graph state, and every ring-shaped graph state with an odd number of sites, an explicit weighted network reproduces every entanglement value as a minimum cut. So their entanglement lies inside the holographic entropy cone, at every size.",
+         r"S_G(A)=\operatorname{rank}_{\mathbb F_2}\Gamma_{A,\bar A}=\min_{x}\Big[\sum_i|a_i-x_i|+\sum_{(i,j)\in E}|x_i-x_j|\Big]",
+         "This does not establish a gravitational dual or physical spacetime. Rings of four and six sites are also certified; even rings in general pass every test run so far, up to 13 sites, but are not proved. No claim is made that this result is new."),
+    ]),
     ("Toward spacetime", "What the algebra gives, and where it stops.", [
         ("proved", 28, "Observer metric signature",
          "The observer's filter splits directions into one kept and others discarded, which gives the plus, minus, minus, minus sign pattern of spacetime, algebraically.",
@@ -379,9 +405,8 @@ coupling rigid: it cannot be bent slightly into a one-way one. But consistency d
 Many one-way couplings pass every consistency test. In a fully symmetric model system, further candidates also fail to choose:
 requiring the system to look the same at every size, favouring equal signals at every depth, and outside noise, which erases the
 hidden phases rather than choosing them. {label("numerical")} Steady self-renewal combined with a sufficiently complex internal motion
-can hold a structured state in place, but then that motion has to be chosen instead.</dd>
-<dt>Would settle it</dt><dd>A principle, beyond consistency, that picks the coupling between neighbouring observers, or a proof
-that no such principle exists inside the program's rules.</dd>
+can hold a structured state in place, but then that motion has to be chosen instead. {label("model")} A standard measure-and-correct construction prepares a unique state once its coupling rule and its controller are specified. For connected graph states, a controller whose checks touch at most three sites, each with its own one-site correction, allows only chain or ring states, and requiring the same entanglement from every site leaves the ring from five sites up. These controller and state assumptions have not been derived from the program's rules.</dd>
+<dt>Would settle it</dt><dd>A derivation of the observers' required operations and limits from the program's rules, followed by a determination of what freedom is left in the state and the coupling. That includes whether short reach, connectedness and sameness from every site follow from those rules or must be added. The conditional ring result alone does not settle the choice.</dd>
 </dl></div>
 
 <div class="rs-open">{label("open")}
