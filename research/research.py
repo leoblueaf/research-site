@@ -338,6 +338,40 @@ RESULTS = [
          r"S_G(A)=\operatorname{rank}_{\mathbb F_2}\Gamma_{A,\bar A}=\min_{x}\Big[\sum_i|a_i-x_i|+\sum_{(i,j)\in E}|x_i-x_j|\Big]",
          "This does not establish a gravitational dual or physical spacetime. Rings of four and six sites are also certified; even rings in general pass every test run so far, up to 13 sites, but are not proved. No claim is made that this result is new."),
     ]),
+    ("When observer rules imply a ring", "What is proved, which assumptions remain, and what the model does not yet select.", [
+        ("proved", 84, "Three-site stabilizer generators give chains or rings",
+         "For four or more qubits, a pure stabilizer state that is entangled across every split and has a complete set of generating checks involving at most three qubits is equivalent to a chain or ring graph state under local Clifford changes of frame and relabelling.",
+         r"w_{\mathrm{gen}}(\psi)=3\iff\psi\sim_{\mathrm{LC,perm}}|P_n\rangle\ \text{or}\ |C_n\rangle\quad(n\ge4)",
+         "Here generator weight means the smallest possible maximum support of a complete generating set. This classifies states, not arbitrary preparation circuits or the support of every possible check. The proof combines analytic reductions with exact computer-assisted base cases. It does not derive a three-site limit. The locality invariant is due to Van den Nest and coworkers."),
+        ("proved", 85, "The least reach for a unique undisturbed target",
+         "For a pure stabilizer state, the minimum support needed by local channels that each leave the target unchanged, and have no other common fixed state, equals its generator weight. Among fully entangled states on three or more qubits, the smallest such support is three.",
+         r"t_{\mathrm{NDS}}(\psi)=w_{\mathrm{gen}}(\psi),\qquad \min_{\psi\in\mathcal S_n^{\mathrm{conn}}}t_{\mathrm{NDS}}(\psi)=3\quad(n\ge3)",
+         "The minimum is over pure stabilizer states entangled across every split of the same n physical qubits. Support counts each complete channel. A unique common fixed state need not attract under every schedule. The theorem establishes a feasibility threshold, not that observers operate at it. An entangled two-qubit pair needs only reach two. The framework is quasi-local stabilization theory (Ticozzi and Viola)."),
+        ("model", 86, "Exact consistency restricts coupling phases",
+         "In the aligned-frame model without physical renewal, exact nonzero readings that recover every incident coupling phase in every neighbour background force the phases to be zero or a half turn. This is proved for forests and for networks with at most three neighbours per site.",
+         r"\mathrm{GRC}_{\mathrm{full}}\implies J_{ij}\in\{0,\pi\}\pmod{2\pi}",
+         "This is a consistency theorem, not proof that noise drives arbitrary phases toward those values. The model has pairwise occupation-phase couplings, positive pump and bare-flip rates, nonnegative dephasing, and the stated frame alignment. With physical renewal, exclusion remains proved for forests at every strength and for chains and rings at sufficiently weak strength. Some proofs use exact computer-assisted certificates."),
+        ("model", 87, "Who can communicate with whom",
+         "When the complete dynamics and operation menu respect graph components, no signal can cross between components. With positive coherent renewal, the specified joint readouts and pulses, stored records and cooperating relays, every site can communicate with every other site in its component.",
+         r"\operatorname{Reach}_{\mathrm{coop}}(i)=C_G(i)",
+         "This defines an observer's world as its cooperative communication sector. The theorem assumes local memory, timing and scheduling, and excludes external messages or shared controllers that cross components. Isolation compares extensions with the same initial state inside the component. Communication pulses are separate from the nondisturbing selection actions. No useful minimum throughput is claimed."),
+        ("model", 88, "Own records reveal the number of neighbours",
+         "In the specified noisy graph-state model, observers with the same number of neighbours have identical stationary own-record probability laws for matched experiments. With degree-sensitive noise, different numbers of neighbours give different laws. Requiring those laws to agree everywhere is therefore equivalent to requiring equal degree.",
+         r"k_d=\frac{\eta}{\eta+2\gamma+2rd+\kappa(d+1)},\qquad \mathrm{OH}_{\mathrm{own}}\iff G\ \text{is regular}\quad(\eta>0,\ 2r+\kappa>0)",
+         "Rates and clocks are uniformly calibrated, initialization is stationary, and other observers follow the fixed dynamics without additional interventions or messages. Equality means the same probabilities, not identical sample records. One observer can estimate its own degree but cannot certify global regularity alone. Operational homogeneity remains a named principle."),
+        ("model", 89, "A window for correct readout and communication",
+         "For an already quantized graph, sufficiently weak positive renewal preserves correct readings of every half-turn link and supplies a nonzero communication channel. At an exact threshold a conditional signal vanishes; above it, the corresponding phase reading is wrong.",
+         r"0<\kappa<\kappa_{\mathrm{crit}}(d)=\frac{B_d+\sqrt{B_d^2+4A_dC_d}}{2C_d},\quad A_d=\eta^2(1+d/2)+2\eta\gamma,\ B_d=\eta(1-s)-2s(\gamma+rd),\ C_d=s(d+1)",
+         "Here eta is the pump rate, r the bare-flip rate, gamma the dephasing rate, and s the renewal coherence, with eta > 0 and 0 < s <= 1. For a whole graph, use the smallest threshold among its nonisolated vertices. The threshold is excluded, and zero renewal supplies no renewal-assisted channel. This is a Clifford-readout window, not proof that all competing phases are excluded throughout it or that communication is efficient."),
+        ("proved", 90, "Three-neighbour graph states are not disguised rings",
+         "For a graph state with exactly three neighbours at every vertex, every product of stabilizer checks acts on an even number of qubits. A ring graph state has a check acting on three. Local Clifford changes of individual qubit frames preserve these support counts, so the two cannot be equivalent.",
+         r"\mathrm{wt}(K_S)\equiv\sum_{v\in S}(1+\deg v)\pmod2",
+         "For finite simple graphs and rings with at least three vertices. This is a known graph-code parity rule, used here to separate candidate target states. The conclusion concerns local Clifford equivalence and relabelling, not every possible notion of physical equivalence."),
+        ("model", 91, "One target class per size singles out rings",
+         "In the canonical family, admit every connected simple graph with equal degree at every site whose canonical checks obey one common support cap. Requiring exactly one graph up to relabelling at every size of three or more sites forces the cap to be three. The unique graph at each size is a ring.",
+         r"\left[\forall n\ge3:\ |\mathcal W_t(n)|=1\right]\iff t=3,\qquad \mathcal W_3(n)=\{[C_n]\}",
+         "The family includes all graphs satisfying these conditions, with no additional graph exclusions and with the stated physical admission conditions fixed. One target class per size is a proposed determinacy principle, not ordinary dynamical uniqueness and not a derived law of nature. The result selects the target graph conditionally, not its size, rates, length scale or clock. Additional restrictions can change which capacities are categorical."),
+    ]),
     ("Toward spacetime", "What the algebra gives, and where it stops.", [
         ("proved", 28, "Observer metric signature",
          "The observer's filter splits directions into one kept and others discarded, which gives the plus, minus, minus, minus sign pattern of spacetime, algebraically.",
@@ -382,6 +416,17 @@ def body_open(href):
 <p class="sub">What is not settled, and what would settle it</p>
 <p class="lead">The program's main results are walls as well as theorems, and the walls point at the questions that
 matter. These are the ones currently open, stated so that each could be settled.</p>
+
+<h2>Currently working on</h2>
+<p>Updated 21 October 2026. The ring result remains conditional. Current work tests its physical premises, extends the proved parameter ranges, and documents which proof steps have received independent verification.</p>
+<ol class="rs-map">
+<li class="open"><b>The physical basis of the ring criterion</b><span>No. 91 derives a ring within the specified canonical family after imposing one target class per size. The open question is whether that determinacy principle and the chosen controller family have an independent physical justification. Holographic entropy conditions are also being tested as an additional filter. The tested examples include non-ring survivors, so these conditions have not selected rings.</span></li>
+<li class="open"><b>Sideways sight</b><span>The model grants coherence-reading instruments and controlled operations, including joint checks. We are asking how an observer inside the model could implement them, and what interaction, memory and timing resources would be required. A one-site basis change alone does not supply the complete joint measurement instrument.</span></li>
+<li class="open"><b>Full consistency under stronger renewal</b><span>Quantization with renewal is proved for forests at every strength and for chains and rings at sufficiently weak renewal. The next target is exclusion of non-Clifford solutions throughout the entire Clifford-readout window of No. 89. Correct readout of an already quantized graph is not the same theorem as exclusion of every competing dressing.</span></li>
+<li class="open"><b>Alignment of noise and coupling</b><span>Alignment remains a named premise. Exact counterexamples show that correct readout and communication do not force it, even when the stationary bare coherence points along the renewal direction. We are looking for an independent physical justification or a replacement model.</span></li>
+<li class="open"><b>Even rings and holographic entropy</b><span>Paths and odd rings have all-size entropy-network proofs. Some even rings, including rings of four and six sites, also have exact certificates. Larger cases have passed stated finite tests, but a theorem covering every even ring remains open.</span></li>
+<li class="open"><b>Independent proof replays</b><span>Independent checks and replays are continuing. Each result should identify which source identities, certificate entries and proof steps have been checked independently, and which remain pending. Numerical agreement, exact fingerprints and complete independent certificate replay are recorded separately.</span></li>
+</ol>
 
 <h2>The story so far</h2>
 <ol class="rs-map">
