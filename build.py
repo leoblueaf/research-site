@@ -102,6 +102,67 @@ def page(here, title, body, sec=None, description=""):
 """
 
 
+# ------------------------------------------------------------------ "New" markers (hub-owned)
+# Content comes unchanged from research/research.py (the math chat's file). The hub marks
+# what changed in the latest update here, so a new research.py never wipes the markers.
+# Each entry: page, exact HTML to find, replacement. The build stops if a target is missing.
+WHATS_NEW_DATE = "23 November 2026"
+WHATS_NEW = [
+    ("research/open", "Currently working on", "#working-on",
+     "Refreshed. The main focus is now the gravity question: whether an energy source changes what a separate probe experiences."),
+    ("research/results", "Result No. 5 corrected", "#no-5",
+     "The uniqueness claim is withdrawn. The exact bound stands, and it is established mathematics."),
+    ("research/corrections", "New correction: the most hidden pattern", "#most-hidden-pattern",
+     "What the page said before, and what is true now."),
+    ("research/open", "Does spacetime emerge from observers?", "#spacetime",
+     "Revised to say what the new three-dimensional model does and does not show."),
+]
+NEW = '<span class="rs-new">New</span>'
+UPD = '<span class="rs-new">Updated</span>'
+DOT = '<span class="rs-dot" title="Updated {d}"></span>'.format(d=WHATS_NEW_DATE)
+NEW_MARKS = {
+    "research/results": [('<span class="num">No. 5</span>', '<span class="num" id="no-5"><span class="rs-new" style="margin:0 .5rem 0 0">Updated</span>No. 5</span>')],
+    "research/corrections": [('<h3>The most hidden pattern</h3>', '<h3 id="most-hidden-pattern">The most hidden pattern ' + NEW + '</h3>')],
+    "research/open": [('<h2>Currently working on</h2>', '<h2 id="working-on">Currently working on ' + UPD + '</h2>'),
+                      ('<h3>Does spacetime emerge from observers?</h3>', '<h3 id="spacetime">Does spacetime emerge from observers? ' + UPD + '</h3>')],
+}
+NEW_PAGES = ["What is proved", "Open questions", "Corrections"]
+NEW_CSS = (".rs-new{display:inline-block;margin-left:.5rem;padding:.2rem .5rem;border-radius:999px;"
+           "font:600 .62rem/1 var(--mono, monospace);letter-spacing:.06em;text-transform:uppercase;"
+           "background:var(--app2);color:#fff;vertical-align:middle}"
+           ".rs-dot{display:inline-block;width:.42rem;height:.42rem;margin-left:.35rem;border-radius:50%;"
+           "background:var(--app2);vertical-align:middle}"
+           ".rs-whatsnew{border:1px solid var(--app2);border-radius:14px;padding:1.1rem 1.3rem}"
+           ".rs-whatsnew h2{margin:0 0 .6rem}.rs-whatsnew ul{margin:0;padding-left:1.1rem}"
+           ".rs-whatsnew li{margin:.45rem 0}.rs-whatsnew li span{display:block;opacity:.8}"
+           "@media (prefers-color-scheme: dark){:root:not([data-theme=\"light\"]) .rs-new{color:#141414}}"
+           ":root[data-theme=\"dark\"] .rs-new{color:#141414}")
+
+
+def whats_new_box(here):
+    items = "".join(
+        f'<li><a href="{href(here, pg)}{anchor}"><b>{E(title)}</b></a><span>{E(text)}</span></li>'
+        for pg, title, anchor, text in WHATS_NEW)
+    return (f'<section class="section"><div class="wrap col"><div class="rs-whatsnew">'
+            f'<h2>What\'s new {UPD}</h2><p>Updated {WHATS_NEW_DATE}.</p><ul>{items}</ul></div></div></section>')
+
+
+def mark_new(here, doc):
+    for find, repl in NEW_MARKS.get(here, []):
+        if find not in doc:
+            raise SystemExit(f"New-marker target missing on {here}: {find}")
+        doc = doc.replace(find, repl, 1)
+    for name in NEW_PAGES:
+        doc = doc.replace(f">{name}</a>", f">{name}{DOT}</a>")
+    if here == "research":
+        i = doc.find("</nav>")
+        if i < 0:
+            raise SystemExit("New-marker target missing: overview subnav")
+        i += len("</nav>")
+        doc = doc[:i] + "\n" + whats_new_box(here) + doc[i:]
+    return doc.replace("</head>", f"<style>{NEW_CSS}</style>\n</head>", 1)
+
+
 def write(rel_dir, content):
     d = os.path.join(DIST, local(rel_dir))
     os.makedirs(d, exist_ok=True)
@@ -117,6 +178,7 @@ def main():
     for here, (fn, title, desc) in research.BUILDERS.items():
         doc = page(here, title, fn(href), research.SECTION, desc)
         doc = doc.replace("</head>", f'<link rel="stylesheet" href="{asset_url(here, "research.css")}">\n</head>', 1)
+        doc = mark_new(here, doc)
         write(here, doc)
     nf = page("404", "Page not found", """<section class="wrap intro"><p class="eyebrow">404</p>
 <h1>That page isn't here.</h1><p>It may have moved. <a href="/">Go to the overview</a>.</p></section>""",
